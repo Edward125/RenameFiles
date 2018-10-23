@@ -71,36 +71,41 @@ namespace RenameFiles
             {
                 //
                 //Console.WriteLine(string.Format("文件名：{0}---文件目录{1}", item.FileName, item.FilePath));
+                string newName = "";
                 if (item.FileName.Contains("-"))
                 {
+                    newName = item.FileName.Replace("-", "");
+                }
+                if (newName.Contains("联网更新"))
+                    newName = newName.Replace("联网更新", "");
+
                     //this.Text = "正在处理:" + item.FileName;
-                    string newName = item.FileName.Replace("-", "");
+                    
                     try
                     {
-
                         if (File.Exists(item.FilePath))
                         {
-                            File.Move(item.FilePath, item.FileDirectory + @"\" + newName);
-                            File.Delete(item.FilePath);
                             i++;
+                            this.Text= "正在处理第:" + i + "个文件";
+                            File.Move(item.FilePath, item.FileDirectory + @"\" + newName);
+                            //File.Delete(item.FilePath);
+                          
                         }
 
 
-             
                     }
                     catch (Exception ex)
                     {
                         MessageBox.Show("修改文件名出现错误," + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         
                     }
-     
 
-                }
             }
 
 
 
             MessageBox.Show("共计完成修改文件个数:" + i, "Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            this.Text = "批量删除文件名中的-,Ver:" + Application.ProductVersion;
             txtFolder.Enabled = true;
             btnGo.Enabled = true;
 
