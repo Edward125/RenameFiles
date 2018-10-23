@@ -32,7 +32,6 @@
             this.txtFolder = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.label2 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.chk1 = new System.Windows.Forms.CheckBox();
             this.chk2 = new System.Windows.Forms.CheckBox();
@@ -94,15 +93,6 @@
             this.groupBox1.Size = new System.Drawing.Size(451, 78);
             this.groupBox1.TabIndex = 3;
             this.groupBox1.TabStop = false;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(125, 9);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(281, 12);
-            this.label2.TabIndex = 4;
-            this.label2.Text = "功能:删除执法仪视频文件名称中的\"-\"和\"联网更新\"";
             // 
             // groupBox2
             // 
@@ -308,7 +298,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(484, 319);
             this.Controls.Add(this.groupBox2);
-            this.Controls.Add(this.label2);
             this.Controls.Add(this.groupBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
@@ -320,7 +309,6 @@
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -330,7 +318,6 @@
         private System.Windows.Forms.TextBox txtFolder;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
