@@ -57,6 +57,7 @@ namespace RenameFiles
             txtFolder.Enabled = false;
             btnGo.Enabled = false;
 
+            grbSetting.Enabled = false;
             long  i = 0;
 
             //DirectoryInfo di = new DirectoryInfo(txtFolder.Text.Trim ());
@@ -163,7 +164,7 @@ namespace RenameFiles
             this.Text = "批量删除文件名中的-,Ver:" + Application.ProductVersion;
             txtFolder.Enabled = true;
             btnGo.Enabled = true;
-
+            grbSetting.Enabled = true;
 
         }
 
