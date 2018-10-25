@@ -28,10 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
             this.btnGo = new System.Windows.Forms.Button();
             this.txtFolder = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.chkIncludeFolders = new System.Windows.Forms.CheckBox();
+            this.btnPreview = new System.Windows.Forms.Button();
             this.grbSetting = new System.Windows.Forms.GroupBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -53,17 +56,16 @@
             this.chk1 = new System.Windows.Forms.CheckBox();
             this.lstViewFileInfoView = new System.Windows.Forms.ListView();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.btnPreview = new System.Windows.Forms.Button();
+            this.btnSelectNotAllExtension = new System.Windows.Forms.Button();
+            this.btnSelectAllExtension = new System.Windows.Forms.Button();
             this.chklstExtension = new System.Windows.Forms.CheckedListBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.lstExtension = new System.Windows.Forms.ListBox();
-            this.txtAddExtension = new System.Windows.Forms.TextBox();
-            this.btnAddExtension = new System.Windows.Forms.Button();
-            this.btnDeleteExtension = new System.Windows.Forms.Button();
+            this.label6 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.chkIncludeFolders = new System.Windows.Forms.CheckBox();
-            this.btnSelectAllExtension = new System.Windows.Forms.Button();
-            this.btnSelectNotAllExtension = new System.Windows.Forms.Button();
+            this.btnDeleteExtension = new System.Windows.Forms.Button();
+            this.btnAddExtension = new System.Windows.Forms.Button();
+            this.txtAddExtension = new System.Windows.Forms.TextBox();
+            this.lstExtension = new System.Windows.Forms.ListBox();
             this.bgwPreview = new System.ComponentModel.BackgroundWorker();
             this.bgwRenameFiles = new System.ComponentModel.BackgroundWorker();
             this.groupBox1.SuspendLayout();
@@ -113,6 +115,26 @@
             this.groupBox1.TabIndex = 3;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "主目录选择";
+            // 
+            // chkIncludeFolders
+            // 
+            this.chkIncludeFolders.AutoSize = true;
+            this.chkIncludeFolders.Location = new System.Drawing.Point(88, 59);
+            this.chkIncludeFolders.Name = "chkIncludeFolders";
+            this.chkIncludeFolders.Size = new System.Drawing.Size(96, 16);
+            this.chkIncludeFolders.TabIndex = 4;
+            this.chkIncludeFolders.Text = "包含子文件夹";
+            this.chkIncludeFolders.UseVisualStyleBackColor = true;
+            // 
+            // btnPreview
+            // 
+            this.btnPreview.Location = new System.Drawing.Point(360, 51);
+            this.btnPreview.Name = "btnPreview";
+            this.btnPreview.Size = new System.Drawing.Size(76, 30);
+            this.btnPreview.TabIndex = 3;
+            this.btnPreview.Text = "预览文件";
+            this.btnPreview.UseVisualStyleBackColor = true;
+            this.btnPreview.Click += new System.EventHandler(this.btnPreview_Click);
             // 
             // grbSetting
             // 
@@ -333,15 +355,25 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "预览文件类型列表";
             // 
-            // btnPreview
+            // btnSelectNotAllExtension
             // 
-            this.btnPreview.Location = new System.Drawing.Point(360, 51);
-            this.btnPreview.Name = "btnPreview";
-            this.btnPreview.Size = new System.Drawing.Size(76, 30);
-            this.btnPreview.TabIndex = 3;
-            this.btnPreview.Text = "预览文件";
-            this.btnPreview.UseVisualStyleBackColor = true;
-            this.btnPreview.Click += new System.EventHandler(this.btnPreview_Click);
+            this.btnSelectNotAllExtension.Location = new System.Drawing.Point(96, 212);
+            this.btnSelectNotAllExtension.Name = "btnSelectNotAllExtension";
+            this.btnSelectNotAllExtension.Size = new System.Drawing.Size(75, 30);
+            this.btnSelectNotAllExtension.TabIndex = 7;
+            this.btnSelectNotAllExtension.Text = "反选";
+            this.btnSelectNotAllExtension.UseVisualStyleBackColor = true;
+            this.btnSelectNotAllExtension.Click += new System.EventHandler(this.btnSelectNotAllExtension_Click);
+            // 
+            // btnSelectAllExtension
+            // 
+            this.btnSelectAllExtension.Location = new System.Drawing.Point(11, 212);
+            this.btnSelectAllExtension.Name = "btnSelectAllExtension";
+            this.btnSelectAllExtension.Size = new System.Drawing.Size(75, 30);
+            this.btnSelectAllExtension.TabIndex = 7;
+            this.btnSelectAllExtension.Text = "全选";
+            this.btnSelectAllExtension.UseVisualStyleBackColor = true;
+            this.btnSelectAllExtension.Click += new System.EventHandler(this.btnSelectAllExtension_Click);
             // 
             // chklstExtension
             // 
@@ -350,9 +382,11 @@
             this.chklstExtension.Name = "chklstExtension";
             this.chklstExtension.Size = new System.Drawing.Size(146, 180);
             this.chklstExtension.TabIndex = 0;
+            this.chklstExtension.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.chklstExtension_ItemCheck);
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.label6);
             this.groupBox3.Controls.Add(this.label2);
             this.groupBox3.Controls.Add(this.btnDeleteExtension);
             this.groupBox3.Controls.Add(this.btnAddExtension);
@@ -365,33 +399,23 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "更名文件类型列表";
             // 
-            // lstExtension
+            // label6
             // 
-            this.lstExtension.FormattingEnabled = true;
-            this.lstExtension.ItemHeight = 12;
-            this.lstExtension.Location = new System.Drawing.Point(6, 26);
-            this.lstExtension.Name = "lstExtension";
-            this.lstExtension.Size = new System.Drawing.Size(120, 208);
-            this.lstExtension.TabIndex = 0;
-            this.lstExtension.DoubleClick += new System.EventHandler(this.lstExtension_DoubleClick);
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(14, 226);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(209, 12);
+            this.label6.TabIndex = 7;
+            this.label6.Text = "注意:若不选定扩展名,则修改所有文件";
             // 
-            // txtAddExtension
+            // label2
             // 
-            this.txtAddExtension.Location = new System.Drawing.Point(135, 47);
-            this.txtAddExtension.Name = "txtAddExtension";
-            this.txtAddExtension.Size = new System.Drawing.Size(114, 21);
-            this.txtAddExtension.TabIndex = 1;
-            this.txtAddExtension.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtAddExtension_KeyPress);
-            // 
-            // btnAddExtension
-            // 
-            this.btnAddExtension.Location = new System.Drawing.Point(148, 83);
-            this.btnAddExtension.Name = "btnAddExtension";
-            this.btnAddExtension.Size = new System.Drawing.Size(76, 30);
-            this.btnAddExtension.TabIndex = 4;
-            this.btnAddExtension.Text = "添加";
-            this.btnAddExtension.UseVisualStyleBackColor = true;
-            this.btnAddExtension.Click += new System.EventHandler(this.btnAddExtension_Click);
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(156, 25);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(65, 12);
+            this.label2.TabIndex = 6;
+            this.label2.Text = "输入扩展名";
             // 
             // btnDeleteExtension
             // 
@@ -403,49 +427,43 @@
             this.btnDeleteExtension.UseVisualStyleBackColor = true;
             this.btnDeleteExtension.Click += new System.EventHandler(this.btnDeleteExtension_Click);
             // 
-            // label2
+            // btnAddExtension
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(156, 25);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(65, 12);
-            this.label2.TabIndex = 6;
-            this.label2.Text = "输入扩展名";
+            this.btnAddExtension.Location = new System.Drawing.Point(148, 83);
+            this.btnAddExtension.Name = "btnAddExtension";
+            this.btnAddExtension.Size = new System.Drawing.Size(76, 30);
+            this.btnAddExtension.TabIndex = 4;
+            this.btnAddExtension.Text = "添加";
+            this.btnAddExtension.UseVisualStyleBackColor = true;
+            this.btnAddExtension.Click += new System.EventHandler(this.btnAddExtension_Click);
             // 
-            // chkIncludeFolders
+            // txtAddExtension
             // 
-            this.chkIncludeFolders.AutoSize = true;
-            this.chkIncludeFolders.Location = new System.Drawing.Point(88, 59);
-            this.chkIncludeFolders.Name = "chkIncludeFolders";
-            this.chkIncludeFolders.Size = new System.Drawing.Size(96, 16);
-            this.chkIncludeFolders.TabIndex = 4;
-            this.chkIncludeFolders.Text = "包含子文件夹";
-            this.chkIncludeFolders.UseVisualStyleBackColor = true;
+            this.txtAddExtension.Location = new System.Drawing.Point(135, 47);
+            this.txtAddExtension.Name = "txtAddExtension";
+            this.txtAddExtension.Size = new System.Drawing.Size(114, 21);
+            this.txtAddExtension.TabIndex = 1;
+            this.txtAddExtension.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtAddExtension_KeyPress);
             // 
-            // btnSelectAllExtension
+            // lstExtension
             // 
-            this.btnSelectAllExtension.Location = new System.Drawing.Point(12, 212);
-            this.btnSelectAllExtension.Name = "btnSelectAllExtension";
-            this.btnSelectAllExtension.Size = new System.Drawing.Size(76, 30);
-            this.btnSelectAllExtension.TabIndex = 7;
-            this.btnSelectAllExtension.Text = "全选";
-            this.btnSelectAllExtension.UseVisualStyleBackColor = true;
-            this.btnSelectAllExtension.Click += new System.EventHandler(this.btnSelectAllExtension_Click);
-            // 
-            // btnSelectNotAllExtension
-            // 
-            this.btnSelectNotAllExtension.Location = new System.Drawing.Point(95, 212);
-            this.btnSelectNotAllExtension.Name = "btnSelectNotAllExtension";
-            this.btnSelectNotAllExtension.Size = new System.Drawing.Size(76, 30);
-            this.btnSelectNotAllExtension.TabIndex = 7;
-            this.btnSelectNotAllExtension.Text = "反选";
-            this.btnSelectNotAllExtension.UseVisualStyleBackColor = true;
-            this.btnSelectNotAllExtension.Click += new System.EventHandler(this.btnSelectNotAllExtension_Click);
+            this.lstExtension.FormattingEnabled = true;
+            this.lstExtension.ItemHeight = 12;
+            this.lstExtension.Location = new System.Drawing.Point(6, 26);
+            this.lstExtension.Name = "lstExtension";
+            this.lstExtension.Size = new System.Drawing.Size(120, 184);
+            this.lstExtension.TabIndex = 0;
+            this.lstExtension.DoubleClick += new System.EventHandler(this.lstExtension_DoubleClick);
             // 
             // bgwPreview
             // 
             this.bgwPreview.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bgwPreview_DoWork);
             this.bgwPreview.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgwPreview_RunWorkerCompleted);
+            // 
+            // bgwRenameFiles
+            // 
+            this.bgwRenameFiles.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bgwRenameFiles_DoWork);
+            this.bgwRenameFiles.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgwRenameFiles_RunWorkerCompleted);
             // 
             // frmMain
             // 
@@ -459,6 +477,7 @@
             this.Controls.Add(this.grbSetting);
             this.Controls.Add(this.groupBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "frmMain";
             this.Text = "Form1";
@@ -514,6 +533,7 @@
         private System.Windows.Forms.Button btnSelectAllExtension;
         private System.ComponentModel.BackgroundWorker bgwPreview;
         private System.ComponentModel.BackgroundWorker bgwRenameFiles;
+        private System.Windows.Forms.Label label6;
     }
 }
 

@@ -88,115 +88,152 @@ namespace RenameFiles
                return;
             }
 
-            txtFolder.Enabled = false;
-            btnGo.Enabled = false;
-            grbSetting.Enabled = false;
-            long  i = 0;
 
 
+             if (!bgwRenameFiles.IsBusy)
+                  bgwRenameFiles.RunWorkerAsync();
 
-            //DirectoryInfo di = new DirectoryInfo(txtFolder.Text.Trim ());
-            //FileInfo[] fis = di.GetFiles();
-            //foreach (FileInfo fi in fis)
-            //{
-            //    if (fi.Name.Contains("-"))
-            //    {
-            //        string newName = fi.Name.Replace("-", "");
-            //        File.Move(fi.FullName, txtFolder.Text.Trim() + @"\" + newName);
-            //        File.Delete(fi.FullName);
-            //        i++;
-            //    }
-
-            //}
-
-
-
-            if (chkIncludeFolders.Checked)  //包含子文件夹
-            {
-
-            }
-            else                            //不包含子文件夹
-            {
-
-            }
-
-
-
-
-
-            List<FileInformation> list = new List<FileInformation>();
-            list =  DirectoryAllFiles.GetAllFiles(new System.IO.DirectoryInfo(@txtFolder.Text.Trim()));
-
-            foreach (var item in list)
-            {
-                //
-                //Console.WriteLine(string.Format("文件名：{0}---文件目录{1}", item.FileName, item.FilePath));
-                string newName = CheckFilesName(item.FileName);
-
-                //if (chk1.Checked  && !string.IsNullOrEmpty (txtold1.Text.Trim ()))
-                //{
-                //    if (item.FileName.Contains (@txtold1.Text.Trim ()))
-                //        newName = item.FileName.Replace(@txtold1.Text.Trim(), @txtnew1.Text.Trim());
-
-                //}
-
-                //if (chk2.Checked && !string.IsNullOrEmpty(txtold2.Text.Trim()))
-                //{
-                //    if (item.FileName.Contains(@txtold2.Text.Trim()))
-                //        newName = item.FileName.Replace(@txtold2.Text.Trim(), @txtnew2.Text.Trim());
-
-                //}
-
-                //if (chk3.Checked && !string.IsNullOrEmpty(txtold3.Text.Trim()))
-                //{
-                //    if (item.FileName.Contains(@txtold3.Text.Trim()))
-                //        newName = item.FileName.Replace(@txtold3.Text.Trim(), @txtnew3.Text.Trim());
-
-                //}
-
-                //if (chk4.Checked && !string.IsNullOrEmpty(txtold4.Text.Trim()))
-                //{
-                //    if (item.FileName.Contains(@txtold4.Text.Trim()))
-                //        newName = item.FileName.Replace(@txtold4.Text.Trim(), @txtnew4.Text.Trim());
-
-                //}
-
-                //if (chk5.Checked && !string.IsNullOrEmpty(txtold5.Text.Trim()))
-                //{
-                //    if (item.FileName.Contains(@txtold5.Text.Trim()))
-                //        newName = item.FileName.Replace(@txtold5.Text.Trim(), @txtnew5.Text.Trim());
-
-                //}
-
-
-
-                if (!string.IsNullOrEmpty(newName) && (newName != item.FileName))
-                {
-                    try
-                    {
-                        if (File.Exists(item.FilePath))
-                        {
-                            i++;
-                            this.Text = "正在处理第:" + i + "个文件";
-                            File.Move(item.FilePath, item.FileDirectory + @"\" + newName);
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show("修改文件名出现错误," + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
-                    }
-                }
-
-            }
-
-            MessageBox.Show("共计完成修改文件个数:" + i, "Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            this.Text = "批量修改文件名,Ver:" + Application.ProductVersion;
-            txtFolder.Enabled = true;
-            btnGo.Enabled = true;
-            grbSetting.Enabled = true;
 
         }
+
+
+
+        private void RenameFiles()
+        {
+            this.Invoke((EventHandler)(delegate
+            {
+                txtFolder.Enabled = false;
+                txtAddExtension.Enabled = false;
+                chkIncludeFolders.Enabled = false;
+                btnGo.Enabled = false;
+                btnPreview.Enabled = false;
+                btnAddExtension.Enabled = false;
+                btnDeleteExtension.Enabled = false;
+                btnSelectAllExtension.Enabled = false;
+                btnSelectNotAllExtension.Enabled = false;
+                grbSetting.Enabled = false;
+
+
+                lstViewFileInfoView.Items.Clear();
+                long filesCount = 0;
+                if (chkIncludeFolders.Checked)  //包含子文件夹
+                {
+                    List<FileInformation> list = new List<FileInformation>();
+                    list = DirectoryAllFiles.GetAllFiles(new System.IO.DirectoryInfo(@txtFolder.Text.Trim()));
+                    foreach (var item in list)
+                    {
+
+                        if (lstExtension.Items.Count > 0)   //需要判断扩展名
+                        {
+                            for (int i = 0; i < lstExtension.Items.Count; i++)  //遍历扩展名
+                            {
+                                if (item.FileExtension.ToLower() == lstExtension.Items[i].ToString().ToLower()) //扩展名满足要求
+                                {
+                                    string newName = CheckFilesName(item.FileName);
+                                    if (!string.IsNullOrEmpty(newName) && (newName != item.FileName) && (File.Exists(item.FilePath)))
+                                    {
+                                        try
+                                        {
+                                            filesCount++;
+                                            this.Text = "正在处理第:" + filesCount + "个文件";
+                                            File.Move(item.FilePath, item.FileDirectory + @"\" + newName);
+                                            AddItem2ListView(lstViewFileInfoView, filesCount, item.FileExtension, item.FileName, newName, item.FileDirectory);
+                                        }
+                                        catch (Exception ex)
+                                        {
+                                            MessageBox.Show("修改文件名出现错误," + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        else
+                        {
+                            string newName = CheckFilesName(item.FileName);
+                            if (!string.IsNullOrEmpty(newName) && (newName != item.FileName) && (File.Exists(item.FilePath)))
+                            {
+                                try
+                                {
+                                    filesCount++;
+                                    this.Text = "正在处理第:" + filesCount + "个文件";
+                                    File.Move(item.FilePath, item.FileDirectory + @"\" + newName);
+                                    AddItem2ListView(lstViewFileInfoView, filesCount, item.FileExtension, item.FileName, newName, item.FileDirectory);
+                                }
+                                catch (Exception ex)
+                                {
+                                    MessageBox.Show("修改文件名出现错误," + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                                }
+                            }
+                        }
+                    }
+
+                }
+                else                            //不包含子文件夹
+                {
+                    DirectoryInfo di = new DirectoryInfo(txtFolder.Text.Trim());
+                    FileInfo[] fis = di.GetFiles();
+                    foreach (FileInfo fi in fis)
+                    {
+                        if (lstExtension.Items.Count > 0)
+                        {
+                            for (int i = 0; i < lstExtension.Items.Count; i++)  //遍历扩展名
+                            {
+                                if (fi.Extension.ToLower() == lstExtension.Items[i].ToString().ToLower())
+                                {
+                                    string newName = CheckFilesName(fi.Name);
+                                    if ((newName != fi.Name) && !string.IsNullOrEmpty(newName) && fi.Exists)
+                                    {
+                                        try
+                                        {
+                                            filesCount++;
+                                            this.Text = "正在处理第:" + filesCount + "个文件";
+                                            File.Move(fi.FullName, fi.DirectoryName + @"\" + @newName);
+                                            AddItem2ListView(lstViewFileInfoView, filesCount, fi.Extension, fi.Name, newName, fi.DirectoryName);
+                                        }
+                                        catch (Exception ex)
+                                        {
+                                            MessageBox.Show("修改文件名出现错误," + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                        }
+
+                                    }
+
+                                }
+                            }
+                        }
+                        else
+                        {
+                            string newName = CheckFilesName(fi.Name);
+                            if ((newName != fi.Name) && !string.IsNullOrEmpty(newName) && fi.Exists)
+                            {
+                                try
+                                {
+                                    filesCount++;
+                                    this.Text = "正在处理第:" + filesCount + "个文件";
+                                    File.Move(fi.FullName, fi.DirectoryName + @"\" + @newName);
+                                    AddItem2ListView(lstViewFileInfoView, filesCount, fi.Extension, fi.Name, newName, fi.DirectoryName);
+                                }
+                                catch (Exception ex)
+                                {
+                                    MessageBox.Show("修改文件名出现错误," + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                }
+
+                            }
+
+                        }
+
+                    }
+
+                }
+
+                MessageBox.Show("共计完成修改文件个数:" + filesCount, "Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }));     
+
+        }
+
+
+
 
         private void txtFolder_DoubleClick(object sender, EventArgs e)
         {
@@ -376,6 +413,9 @@ namespace RenameFiles
 
 
 
+        /// <summary>
+        /// 
+        /// </summary>
         private void PreviewFiles()
         {
             this.Invoke((EventHandler)(delegate
@@ -418,7 +458,7 @@ namespace RenameFiles
                     foreach (FileInfo fi in fis)
                     {
                         if (!chklstExtension.Items.Contains(fi.Extension.ToLower())) //不存在,添加
-                            chklstExtension.Items.Add(fi.Extension);
+                            chklstExtension.Items.Add(fi.Extension.ToLower());
                         filesCount++;
                         AddItem2ListView(lstViewFileInfoView, filesCount, fi.Extension, fi.Name, "", fi.DirectoryName);
 
@@ -431,7 +471,7 @@ namespace RenameFiles
 
 
 
-        private void AddItem2ListView(ListView listview,int filescount,string fileextension,string oldname,string newname,string filefolder)
+        private void AddItem2ListView(ListView listview,long filescount,string fileextension,string oldname,string newname,string filefolder)
         {
             //listview.Items.Clear();
             listview.BeginUpdate();//数据更新，UI暂时挂起，直到EndUpdate绘制控件，可以有效避免闪烁并大大提高加载速度 
@@ -481,9 +521,6 @@ namespace RenameFiles
                     chklstExtension.SetItemChecked(i, true);  
                     if (!lstExtension.Items.Contains (chklstExtension.Items[i]))
                         lstExtension.Items.Add (chklstExtension.Items[i]);
-
-
-
                 }
 
             }
@@ -558,7 +595,7 @@ namespace RenameFiles
 
         private void btnDeleteExtension_Click(object sender, EventArgs e)
         {
-            if (lstExtension.Items.Count > 0)
+            if (lstExtension.SelectedIndex != -1)
                 lstExtension.Items.RemoveAt(lstExtension.SelectedIndex);
         }
 
@@ -580,6 +617,46 @@ namespace RenameFiles
             chkIncludeFolders.Enabled = true;
             MessageBox.Show("文件预览完毕.","Complete",MessageBoxButtons.OK,MessageBoxIcon.Information );
         }
+
+        private void bgwRenameFiles_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            this.Text = "批量修改文件名,Ver:" + Application.ProductVersion;
+            txtFolder.Enabled = true;
+            txtAddExtension.Enabled = true;
+            chkIncludeFolders.Enabled = true;
+            btnGo.Enabled = true;
+            btnAddExtension.Enabled = true;
+            btnPreview.Enabled = true;
+            btnDeleteExtension.Enabled = true;
+            btnSelectAllExtension.Enabled = true;
+            btnSelectNotAllExtension.Enabled = true;
+            grbSetting.Enabled = true;
+        }
+
+        private void bgwRenameFiles_DoWork(object sender, DoWorkEventArgs e)
+        {
+            RenameFiles();
+        }
+
+        private void chklstExtension_ItemCheck(object sender, ItemCheckEventArgs e)
+        {
+            string item = chklstExtension.GetItemText(chklstExtension.SelectedItem);
+
+            if (chklstExtension.GetItemCheckState(chklstExtension.SelectedIndex) == CheckState.Unchecked)
+            {
+                if (!lstExtension.Items.Contains(item))
+                    lstExtension.Items.Add(item);
+            }
+            else if (chklstExtension.GetItemCheckState(chklstExtension.SelectedIndex) == CheckState.Checked)
+            {
+                if (lstExtension.Items.Contains(item))
+                    lstExtension.Items.Remove(item);
+            }
+        }
+
+
+
+
 
     }
 }

@@ -12,4 +12,3 @@ E:\Edward\Code\RenameFiles\RenameFiles\obj\Debug\RenameFiles.Properties.Resource
 E:\Edward\Code\RenameFiles\RenameFiles\obj\Debug\RenameFiles.csproj.GenerateResource.Cache
 E:\Edward\Code\RenameFiles\RenameFiles\bin\Debug\RenameFiles.exe
 E:\Edward\Code\RenameFiles\RenameFiles\bin\Debug\RenameFiles.pdb
-E:\Edward\Code\RenameFiles\RenameFiles\obj\Debug\RenameFiles.csprojResolveAssemblyReference.cache
