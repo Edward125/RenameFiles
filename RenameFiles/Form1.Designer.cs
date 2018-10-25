@@ -51,7 +51,7 @@
             this.chk3 = new System.Windows.Forms.CheckBox();
             this.chk2 = new System.Windows.Forms.CheckBox();
             this.chk1 = new System.Windows.Forms.CheckBox();
-            this.lstFileInfoView = new System.Windows.Forms.ListView();
+            this.lstViewFileInfoView = new System.Windows.Forms.ListView();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.btnPreview = new System.Windows.Forms.Button();
             this.chklstExtension = new System.Windows.Forms.CheckedListBox();
@@ -308,13 +308,13 @@
             this.chk1.UseVisualStyleBackColor = true;
             this.chk1.CheckedChanged += new System.EventHandler(this.chk1_CheckedChanged);
             // 
-            // lstFileInfoView
+            // lstViewFileInfoView
             // 
-            this.lstFileInfoView.Location = new System.Drawing.Point(469, 44);
-            this.lstFileInfoView.Name = "lstFileInfoView";
-            this.lstFileInfoView.Size = new System.Drawing.Size(763, 552);
-            this.lstFileInfoView.TabIndex = 6;
-            this.lstFileInfoView.UseCompatibleStateImageBehavior = false;
+            this.lstViewFileInfoView.Location = new System.Drawing.Point(469, 44);
+            this.lstViewFileInfoView.Name = "lstViewFileInfoView";
+            this.lstViewFileInfoView.Size = new System.Drawing.Size(763, 552);
+            this.lstViewFileInfoView.TabIndex = 6;
+            this.lstViewFileInfoView.UseCompatibleStateImageBehavior = false;
             // 
             // groupBox2
             // 
@@ -419,7 +419,7 @@
             this.ClientSize = new System.Drawing.Size(1244, 606);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
-            this.Controls.Add(this.lstFileInfoView);
+            this.Controls.Add(this.lstViewFileInfoView);
             this.Controls.Add(this.grbSetting);
             this.Controls.Add(this.groupBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -463,7 +463,7 @@
         private System.Windows.Forms.CheckBox chk3;
         private System.Windows.Forms.CheckBox chk2;
         private System.Windows.Forms.CheckBox chk1;
-        private System.Windows.Forms.ListView lstFileInfoView;
+        private System.Windows.Forms.ListView lstViewFileInfoView;
         private System.Windows.Forms.Button btnPreview;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.CheckedListBox chklstExtension;

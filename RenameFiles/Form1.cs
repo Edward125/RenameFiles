@@ -45,7 +45,29 @@ namespace RenameFiles
             CheckStatus(chk3, txtold3, txtnew3);
             CheckStatus(chk4, txtold4, txtnew4);
             CheckStatus(chk5, txtold5, txtnew5);
+            setListview(lstViewFileInfoView);
         }
+
+
+        private void setListview(ListView listview)
+        {
+            listview.View = View.Details;
+            listview.MultiSelect = false;
+            listview.AutoArrange = true;
+            listview.GridLines = true;
+            listview.FullRowSelect = true;
+            listview.Columns.Add("序号", 50, HorizontalAlignment.Center);
+            listview.Columns.Add("文件类型", 80, HorizontalAlignment.Center);
+            listview.Columns.Add("原始文件名", 150, HorizontalAlignment.Center);
+            listview.Columns.Add("新文件名", 150, HorizontalAlignment.Center);
+            listview.Columns.Add("文件路径", 350, HorizontalAlignment.Center);
+
+        }
+
+
+
+
+
 
 
 
