@@ -62,6 +62,10 @@
             this.btnDeleteExtension = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.chkIncludeFolders = new System.Windows.Forms.CheckBox();
+            this.btnSelectAllExtension = new System.Windows.Forms.Button();
+            this.btnSelectNotAllExtension = new System.Windows.Forms.Button();
+            this.bgwPreview = new System.ComponentModel.BackgroundWorker();
+            this.bgwRenameFiles = new System.ComponentModel.BackgroundWorker();
             this.groupBox1.SuspendLayout();
             this.grbSetting.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -315,9 +319,12 @@
             this.lstViewFileInfoView.Size = new System.Drawing.Size(763, 552);
             this.lstViewFileInfoView.TabIndex = 6;
             this.lstViewFileInfoView.UseCompatibleStateImageBehavior = false;
+            this.lstViewFileInfoView.DoubleClick += new System.EventHandler(this.lstViewFileInfoView_DoubleClick);
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.btnSelectNotAllExtension);
+            this.groupBox2.Controls.Add(this.btnSelectAllExtension);
             this.groupBox2.Controls.Add(this.chklstExtension);
             this.groupBox2.Location = new System.Drawing.Point(12, 338);
             this.groupBox2.Name = "groupBox2";
@@ -332,7 +339,7 @@
             this.btnPreview.Name = "btnPreview";
             this.btnPreview.Size = new System.Drawing.Size(76, 30);
             this.btnPreview.TabIndex = 3;
-            this.btnPreview.Text = "预览";
+            this.btnPreview.Text = "预览文件";
             this.btnPreview.UseVisualStyleBackColor = true;
             this.btnPreview.Click += new System.EventHandler(this.btnPreview_Click);
             // 
@@ -341,7 +348,7 @@
             this.chklstExtension.FormattingEnabled = true;
             this.chklstExtension.Location = new System.Drawing.Point(19, 26);
             this.chklstExtension.Name = "chklstExtension";
-            this.chklstExtension.Size = new System.Drawing.Size(146, 212);
+            this.chklstExtension.Size = new System.Drawing.Size(146, 180);
             this.chklstExtension.TabIndex = 0;
             // 
             // groupBox3
@@ -366,6 +373,7 @@
             this.lstExtension.Name = "lstExtension";
             this.lstExtension.Size = new System.Drawing.Size(120, 208);
             this.lstExtension.TabIndex = 0;
+            this.lstExtension.DoubleClick += new System.EventHandler(this.lstExtension_DoubleClick);
             // 
             // txtAddExtension
             // 
@@ -373,6 +381,7 @@
             this.txtAddExtension.Name = "txtAddExtension";
             this.txtAddExtension.Size = new System.Drawing.Size(114, 21);
             this.txtAddExtension.TabIndex = 1;
+            this.txtAddExtension.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtAddExtension_KeyPress);
             // 
             // btnAddExtension
             // 
@@ -380,8 +389,9 @@
             this.btnAddExtension.Name = "btnAddExtension";
             this.btnAddExtension.Size = new System.Drawing.Size(76, 30);
             this.btnAddExtension.TabIndex = 4;
-            this.btnAddExtension.Text = "开始";
+            this.btnAddExtension.Text = "添加";
             this.btnAddExtension.UseVisualStyleBackColor = true;
+            this.btnAddExtension.Click += new System.EventHandler(this.btnAddExtension_Click);
             // 
             // btnDeleteExtension
             // 
@@ -389,8 +399,9 @@
             this.btnDeleteExtension.Name = "btnDeleteExtension";
             this.btnDeleteExtension.Size = new System.Drawing.Size(76, 30);
             this.btnDeleteExtension.TabIndex = 5;
-            this.btnDeleteExtension.Text = "开始";
+            this.btnDeleteExtension.Text = "删除";
             this.btnDeleteExtension.UseVisualStyleBackColor = true;
+            this.btnDeleteExtension.Click += new System.EventHandler(this.btnDeleteExtension_Click);
             // 
             // label2
             // 
@@ -410,6 +421,31 @@
             this.chkIncludeFolders.TabIndex = 4;
             this.chkIncludeFolders.Text = "包含子文件夹";
             this.chkIncludeFolders.UseVisualStyleBackColor = true;
+            // 
+            // btnSelectAllExtension
+            // 
+            this.btnSelectAllExtension.Location = new System.Drawing.Point(12, 212);
+            this.btnSelectAllExtension.Name = "btnSelectAllExtension";
+            this.btnSelectAllExtension.Size = new System.Drawing.Size(76, 30);
+            this.btnSelectAllExtension.TabIndex = 7;
+            this.btnSelectAllExtension.Text = "全选";
+            this.btnSelectAllExtension.UseVisualStyleBackColor = true;
+            this.btnSelectAllExtension.Click += new System.EventHandler(this.btnSelectAllExtension_Click);
+            // 
+            // btnSelectNotAllExtension
+            // 
+            this.btnSelectNotAllExtension.Location = new System.Drawing.Point(95, 212);
+            this.btnSelectNotAllExtension.Name = "btnSelectNotAllExtension";
+            this.btnSelectNotAllExtension.Size = new System.Drawing.Size(76, 30);
+            this.btnSelectNotAllExtension.TabIndex = 7;
+            this.btnSelectNotAllExtension.Text = "反选";
+            this.btnSelectNotAllExtension.UseVisualStyleBackColor = true;
+            this.btnSelectNotAllExtension.Click += new System.EventHandler(this.btnSelectNotAllExtension_Click);
+            // 
+            // bgwPreview
+            // 
+            this.bgwPreview.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bgwPreview_DoWork);
+            this.bgwPreview.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgwPreview_RunWorkerCompleted);
             // 
             // frmMain
             // 
@@ -474,6 +510,10 @@
         private System.Windows.Forms.ListBox lstExtension;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.CheckBox chkIncludeFolders;
+        private System.Windows.Forms.Button btnSelectNotAllExtension;
+        private System.Windows.Forms.Button btnSelectAllExtension;
+        private System.ComponentModel.BackgroundWorker bgwPreview;
+        private System.ComponentModel.BackgroundWorker bgwRenameFiles;
     }
 }
 

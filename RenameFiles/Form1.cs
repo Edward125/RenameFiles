@@ -275,7 +275,7 @@ namespace RenameFiles
                 FileInfo[] allFile = dir.GetFiles();
                 foreach (FileInfo fi in allFile)
                 {
-                    FileList.Add(new FileInformation { FileName = fi.Name, FilePath = fi.FullName , FileDirectory  = fi.DirectoryName });
+                    FileList.Add(new FileInformation { FileName = fi.Name, FilePath = fi.FullName , FileDirectory  = fi.DirectoryName,FileExtension = fi.Extension });
                 }
                 DirectoryInfo[] allDir = dir.GetDirectories();
                 foreach (DirectoryInfo d in allDir)
@@ -294,6 +294,7 @@ namespace RenameFiles
             public string FileName { get; set; }
             public string FilePath { get; set; }
             public string FileDirectory { get; set; }
+            public string FileExtension{get;set;}
         }
 
 
@@ -351,29 +352,233 @@ namespace RenameFiles
         private void btnPreview_Click(object sender, EventArgs e)
         {
 
-            if (chkIncludeFolders.Checked)
+            if (string.IsNullOrEmpty(txtFolder.Text.Trim()))
+            {
+                txtFolder.Focus();
+                return;
+            }
+
+            if (!Directory.Exists(txtFolder.Text.Trim()))
+            {
+                MessageBox.Show("文件夹地址不存在,请重新输入", "文件夹不存在", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                txtFolder.SelectAll();
+                txtFolder.Focus();
+                return;
+            }
+
+            if (!this.bgwPreview.IsBusy)
+            {
+                bgwPreview.RunWorkerAsync();
+            }
+
+        }
+
+
+
+
+        private void PreviewFiles()
+        {
+            this.Invoke((EventHandler)(delegate
             {
 
+                txtFolder.Enabled = false;
+                txtAddExtension.Enabled = false;
+                btnGo.Enabled = false;
+                btnPreview.Enabled = false;
+                btnAddExtension.Enabled = false;
+                btnDeleteExtension.Enabled = false;
+                btnSelectAllExtension.Enabled = false;
+                btnSelectNotAllExtension.Enabled = false;
+                chkIncludeFolders.Enabled = false;
+                
+                lstViewFileInfoView.Items.Clear();
+                chklstExtension.Items.Clear();
+                int filesCount = 0;
+
+                if (chkIncludeFolders.Checked)
+                {
+                    List<FileInformation> list = new List<FileInformation>();
+                    list = DirectoryAllFiles.GetAllFiles(new System.IO.DirectoryInfo(@txtFolder.Text.Trim()));
+
+                    foreach (var item in list)
+                    {
+                        if (!chklstExtension.Items.Contains(item.FileExtension.ToLower())) //不存在,添加
+                            chklstExtension.Items.Add(item.FileExtension.ToLower());
+                        filesCount++;
+                        AddItem2ListView(lstViewFileInfoView, filesCount, item.FileExtension, item.FileName, "", item.FileDirectory);
+                    }
+
+
+                }
+                else
+                {
+
+                    DirectoryInfo di = new DirectoryInfo(txtFolder.Text.Trim());
+                    FileInfo[] fis = di.GetFiles();
+                    foreach (FileInfo fi in fis)
+                    {
+                        if (!chklstExtension.Items.Contains(fi.Extension.ToLower())) //不存在,添加
+                            chklstExtension.Items.Add(fi.Extension);
+                        filesCount++;
+                        AddItem2ListView(lstViewFileInfoView, filesCount, fi.Extension, fi.Name, "", fi.DirectoryName);
+
+                    }
+                }
+            }));
+
+        }
+
+
+
+
+        private void AddItem2ListView(ListView listview,int filescount,string fileextension,string oldname,string newname,string filefolder)
+        {
+            //listview.Items.Clear();
+            listview.BeginUpdate();//数据更新，UI暂时挂起，直到EndUpdate绘制控件，可以有效避免闪烁并大大提高加载速度 
+            ListViewItem lt = new ListViewItem();
+            lt = lstViewFileInfoView.Items.Add(filescount.ToString());
+            lt.SubItems.Add(fileextension.ToLower ());
+            lt.SubItems.Add(oldname );
+            lt.SubItems.Add(newname );
+            lt.SubItems.Add(filefolder);
+            listview.EndUpdate();//结束数据处理，UI界面一次性绘制。
+            
+                    
+        }
+
+
+        private void btnSelectNotAllExtension_Click(object sender, EventArgs e)
+        {
+            if (chklstExtension.Items.Count > 0)
+            {
+                for (int i = 0; i < chklstExtension.Items.Count; i++)
+                {
+                    if (chklstExtension.GetItemChecked(i))
+                    {
+                        chklstExtension.SetItemChecked(i, false);
+                        if (lstExtension.Items.Contains(chklstExtension.Items[i]))
+                            lstExtension.Items.Remove (chklstExtension.Items[i]);
+
+                    }
+                    else
+                    {
+                        chklstExtension.SetItemChecked(i, true);
+                        if (!lstExtension.Items.Contains(chklstExtension.Items[i]))
+                            lstExtension.Items.Add(chklstExtension.Items[i]);
+
+                    }
+                }
+
+            }
+        }
+
+        private void btnSelectAllExtension_Click(object sender, EventArgs e)
+        {
+            if (chklstExtension.Items.Count > 0)
+            {
+                for (int i = 0; i < chklstExtension.Items.Count; i++)
+                {
+                    chklstExtension.SetItemChecked(i, true);  
+                    if (!lstExtension.Items.Contains (chklstExtension.Items[i]))
+                        lstExtension.Items.Add (chklstExtension.Items[i]);
+
+
+
+                }
+
+            }
+        }
+
+
+
+
+        private void btnAddExtension_Click(object sender, EventArgs e)
+        {
+            AddExtesnion();
+
+        }
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private void AddExtesnion()
+        {
+            if (string.IsNullOrEmpty(txtAddExtension.Text.Trim()))
+            {
+                txtAddExtension.Focus();
+                return;
+            }
+            if (txtAddExtension.Text.Trim().StartsWith("."))
+            {
+                if (!lstExtension.Items.Contains(txtAddExtension.Text.Trim().ToLower()))
+                {
+                    lstExtension.Items.Add(txtAddExtension.Text.Trim().ToLower());
+                    txtAddExtension.SelectAll();
+                   
+                }
             }
             else
             {
+                MessageBox.Show("扩展名格式错误,请重新输入.", "格式错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txtAddExtension.SelectAll();
+                txtAddExtension.Focus();
+            }
+        }
 
-                //DirectoryInfo di = new DirectoryInfo(txtFolder.Text.Trim ());
-                //FileInfo[] fis = di.GetFiles();
-                //foreach (FileInfo fi in fis)
-                //{
-                //    if (fi.Name.Contains("-"))
-                //    {
-                //        string newName = fi.Name.Replace("-", "");
-                //        File.Move(fi.FullName, txtFolder.Text.Trim() + @"\" + newName);
-                //        File.Delete(fi.FullName);
-                //        i++;
-                //    }
 
-                //}
+        private void txtAddExtension_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!(Char.IsLetterOrDigit(e.KeyChar)) && e.KeyChar != (char)13 && e.KeyChar != (char)8 && e.KeyChar != (char)46)
+            {
+                e.Handled = true;
             }
 
+            if (e.KeyChar == 13)
+            {
+                AddExtesnion();
+            }
+        }
 
+        private void lstExtension_DoubleClick(object sender, EventArgs e)
+        {
+            if (lstExtension.Items.Count > 0)
+                lstExtension.Items.RemoveAt(lstExtension.SelectedIndex);
+        }
+
+        private void lstViewFileInfoView_DoubleClick(object sender, EventArgs e)
+        {
+            string fileFolder = lstViewFileInfoView.SelectedItems[0].SubItems[4].Text;
+            if (!string.IsNullOrEmpty (fileFolder ))
+                System.Diagnostics.Process.Start(@fileFolder);
+
+
+           
+        }
+
+        private void btnDeleteExtension_Click(object sender, EventArgs e)
+        {
+            if (lstExtension.Items.Count > 0)
+                lstExtension.Items.RemoveAt(lstExtension.SelectedIndex);
+        }
+
+        private void bgwPreview_DoWork(object sender, DoWorkEventArgs e)
+        {
+            PreviewFiles();
+        }
+
+        private void bgwPreview_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            txtFolder.Enabled = true;
+            txtAddExtension.Enabled = true;
+            btnGo.Enabled = true;
+            btnPreview.Enabled = true;
+            btnAddExtension.Enabled = true;
+            btnDeleteExtension.Enabled = true;
+            btnSelectAllExtension.Enabled = true;
+            btnSelectNotAllExtension.Enabled = true;
+            chkIncludeFolders.Enabled = true;
+            MessageBox.Show("文件预览完毕.","Complete",MessageBoxButtons.OK,MessageBoxIcon.Information );
         }
 
     }
