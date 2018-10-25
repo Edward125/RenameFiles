@@ -5,10 +5,10 @@ Y:\EdwardCode\RenameFiles\RenameFiles\bin\Debug\RenameFiles.exe
 Y:\EdwardCode\RenameFiles\RenameFiles\bin\Debug\RenameFiles.pdb
 Y:\EdwardCode\RenameFiles\RenameFiles\obj\Debug\RenameFiles.exe
 Y:\EdwardCode\RenameFiles\RenameFiles\obj\Debug\RenameFiles.pdb
-E:\Edward\Code\RenameFiles\RenameFiles\obj\Debug\RenameFiles.exe
-E:\Edward\Code\RenameFiles\RenameFiles\obj\Debug\RenameFiles.pdb
 E:\Edward\Code\RenameFiles\RenameFiles\obj\Debug\RenameFiles.frmMain.resources
 E:\Edward\Code\RenameFiles\RenameFiles\obj\Debug\RenameFiles.Properties.Resources.resources
 E:\Edward\Code\RenameFiles\RenameFiles\obj\Debug\RenameFiles.csproj.GenerateResource.Cache
-E:\Edward\Code\RenameFiles\RenameFiles\bin\Debug\RenameFiles.exe
-E:\Edward\Code\RenameFiles\RenameFiles\bin\Debug\RenameFiles.pdb
+E:\Edward\Code\RenameFiles\RenameFiles\bin\Debug\批量修改文件名.exe
+E:\Edward\Code\RenameFiles\RenameFiles\bin\Debug\批量修改文件名.pdb
+E:\Edward\Code\RenameFiles\RenameFiles\obj\Debug\批量修改文件名.exe
+E:\Edward\Code\RenameFiles\RenameFiles\obj\Debug\批量修改文件名.pdb
