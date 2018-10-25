@@ -33,41 +33,54 @@
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.grbSetting = new System.Windows.Forms.GroupBox();
-            this.chk1 = new System.Windows.Forms.CheckBox();
-            this.chk2 = new System.Windows.Forms.CheckBox();
-            this.chk3 = new System.Windows.Forms.CheckBox();
-            this.chk4 = new System.Windows.Forms.CheckBox();
-            this.chk5 = new System.Windows.Forms.CheckBox();
-            this.txtold1 = new System.Windows.Forms.TextBox();
-            this.txtnew1 = new System.Windows.Forms.TextBox();
-            this.txtold2 = new System.Windows.Forms.TextBox();
-            this.txtnew2 = new System.Windows.Forms.TextBox();
-            this.txtnew3 = new System.Windows.Forms.TextBox();
-            this.txtold3 = new System.Windows.Forms.TextBox();
-            this.txtnew4 = new System.Windows.Forms.TextBox();
-            this.txtold4 = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             this.txtnew5 = new System.Windows.Forms.TextBox();
             this.txtold5 = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
+            this.txtnew4 = new System.Windows.Forms.TextBox();
+            this.txtold4 = new System.Windows.Forms.TextBox();
+            this.txtnew3 = new System.Windows.Forms.TextBox();
+            this.txtold3 = new System.Windows.Forms.TextBox();
+            this.txtnew2 = new System.Windows.Forms.TextBox();
+            this.txtold2 = new System.Windows.Forms.TextBox();
+            this.txtnew1 = new System.Windows.Forms.TextBox();
+            this.txtold1 = new System.Windows.Forms.TextBox();
+            this.chk5 = new System.Windows.Forms.CheckBox();
+            this.chk4 = new System.Windows.Forms.CheckBox();
+            this.chk3 = new System.Windows.Forms.CheckBox();
+            this.chk2 = new System.Windows.Forms.CheckBox();
+            this.chk1 = new System.Windows.Forms.CheckBox();
+            this.lstFileInfoView = new System.Windows.Forms.ListView();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.btnPreview = new System.Windows.Forms.Button();
+            this.chklstExtension = new System.Windows.Forms.CheckedListBox();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.lstExtension = new System.Windows.Forms.ListBox();
+            this.txtAddExtension = new System.Windows.Forms.TextBox();
+            this.btnAddExtension = new System.Windows.Forms.Button();
+            this.btnDeleteExtension = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
+            this.chkIncludeFolders = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.grbSetting.SuspendLayout();
+            this.groupBox2.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnGo
             // 
-            this.btnGo.Location = new System.Drawing.Point(357, 25);
+            this.btnGo.Location = new System.Drawing.Point(361, 15);
             this.btnGo.Name = "btnGo";
             this.btnGo.Size = new System.Drawing.Size(76, 30);
             this.btnGo.TabIndex = 0;
-            this.btnGo.Text = "Go";
+            this.btnGo.Text = "开始";
             this.btnGo.UseVisualStyleBackColor = true;
             this.btnGo.Click += new System.EventHandler(this.btnGo_Click);
             // 
             // txtFolder
             // 
-            this.txtFolder.Location = new System.Drawing.Point(86, 31);
+            this.txtFolder.Location = new System.Drawing.Point(86, 24);
             this.txtFolder.Name = "txtFolder";
             this.txtFolder.Size = new System.Drawing.Size(265, 21);
             this.txtFolder.TabIndex = 1;
@@ -77,7 +90,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(15, 34);
+            this.label1.Location = new System.Drawing.Point(11, 27);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(65, 12);
             this.label1.TabIndex = 2;
@@ -85,14 +98,17 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.chkIncludeFolders);
+            this.groupBox1.Controls.Add(this.btnPreview);
             this.groupBox1.Controls.Add(this.txtFolder);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.btnGo);
-            this.groupBox1.Location = new System.Drawing.Point(12, 23);
+            this.groupBox1.Location = new System.Drawing.Point(12, 36);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(451, 78);
+            this.groupBox1.Size = new System.Drawing.Size(451, 88);
             this.groupBox1.TabIndex = 3;
             this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "主目录选择";
             // 
             // grbSetting
             // 
@@ -114,107 +130,71 @@
             this.grbSetting.Controls.Add(this.chk3);
             this.grbSetting.Controls.Add(this.chk2);
             this.grbSetting.Controls.Add(this.chk1);
-            this.grbSetting.Location = new System.Drawing.Point(12, 107);
+            this.grbSetting.Location = new System.Drawing.Point(12, 132);
             this.grbSetting.Name = "grbSetting";
             this.grbSetting.Size = new System.Drawing.Size(451, 200);
             this.grbSetting.TabIndex = 5;
             this.grbSetting.TabStop = false;
             this.grbSetting.Text = "条件设置";
             // 
-            // chk1
+            // label5
             // 
-            this.chk1.AutoSize = true;
-            this.chk1.Checked = true;
-            this.chk1.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chk1.Location = new System.Drawing.Point(17, 47);
-            this.chk1.Name = "chk1";
-            this.chk1.Size = new System.Drawing.Size(54, 16);
-            this.chk1.TabIndex = 0;
-            this.chk1.Text = "条件1";
-            this.chk1.UseVisualStyleBackColor = true;
-            this.chk1.CheckedChanged += new System.EventHandler(this.chk1_CheckedChanged);
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(336, 25);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(53, 12);
+            this.label5.TabIndex = 16;
+            this.label5.Text = "新字符串";
             // 
-            // chk2
+            // label4
             // 
-            this.chk2.AutoSize = true;
-            this.chk2.Checked = true;
-            this.chk2.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chk2.Location = new System.Drawing.Point(17, 75);
-            this.chk2.Name = "chk2";
-            this.chk2.Size = new System.Drawing.Size(54, 16);
-            this.chk2.TabIndex = 1;
-            this.chk2.Text = "条件2";
-            this.chk2.UseVisualStyleBackColor = true;
-            this.chk2.CheckedChanged += new System.EventHandler(this.chk2_CheckedChanged);
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(149, 25);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(53, 12);
+            this.label4.TabIndex = 15;
+            this.label4.Text = "旧字符串";
             // 
-            // chk3
+            // label3
             // 
-            this.chk3.AutoSize = true;
-            this.chk3.Checked = true;
-            this.chk3.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chk3.Location = new System.Drawing.Point(17, 103);
-            this.chk3.Name = "chk3";
-            this.chk3.Size = new System.Drawing.Size(54, 16);
-            this.chk3.TabIndex = 2;
-            this.chk3.Text = "条件3";
-            this.chk3.UseVisualStyleBackColor = true;
-            this.chk3.CheckedChanged += new System.EventHandler(this.chk3_CheckedChanged);
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(17, 24);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(53, 12);
+            this.label3.TabIndex = 6;
+            this.label3.Text = "勾选条件";
             // 
-            // chk4
+            // txtnew5
             // 
-            this.chk4.AutoSize = true;
-            this.chk4.Location = new System.Drawing.Point(17, 131);
-            this.chk4.Name = "chk4";
-            this.chk4.Size = new System.Drawing.Size(54, 16);
-            this.chk4.TabIndex = 3;
-            this.chk4.Text = "条件4";
-            this.chk4.UseVisualStyleBackColor = true;
-            this.chk4.CheckedChanged += new System.EventHandler(this.chk4_CheckedChanged);
+            this.txtnew5.Location = new System.Drawing.Point(294, 160);
+            this.txtnew5.Name = "txtnew5";
+            this.txtnew5.Size = new System.Drawing.Size(139, 21);
+            this.txtnew5.TabIndex = 14;
+            this.txtnew5.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // chk5
+            // txtold5
             // 
-            this.chk5.AutoSize = true;
-            this.chk5.Location = new System.Drawing.Point(17, 163);
-            this.chk5.Name = "chk5";
-            this.chk5.Size = new System.Drawing.Size(54, 16);
-            this.chk5.TabIndex = 4;
-            this.chk5.Text = "条件5";
-            this.chk5.UseVisualStyleBackColor = true;
-            this.chk5.CheckedChanged += new System.EventHandler(this.chk5_CheckedChanged);
+            this.txtold5.Location = new System.Drawing.Point(115, 160);
+            this.txtold5.Name = "txtold5";
+            this.txtold5.Size = new System.Drawing.Size(126, 21);
+            this.txtold5.TabIndex = 13;
+            this.txtold5.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // txtold1
+            // txtnew4
             // 
-            this.txtold1.Location = new System.Drawing.Point(115, 47);
-            this.txtold1.Name = "txtold1";
-            this.txtold1.Size = new System.Drawing.Size(126, 21);
-            this.txtold1.TabIndex = 5;
-            this.txtold1.Text = "-";
-            this.txtold1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txtnew4.Location = new System.Drawing.Point(294, 130);
+            this.txtnew4.Name = "txtnew4";
+            this.txtnew4.Size = new System.Drawing.Size(139, 21);
+            this.txtnew4.TabIndex = 12;
+            this.txtnew4.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // txtnew1
+            // txtold4
             // 
-            this.txtnew1.Location = new System.Drawing.Point(294, 47);
-            this.txtnew1.Name = "txtnew1";
-            this.txtnew1.Size = new System.Drawing.Size(139, 21);
-            this.txtnew1.TabIndex = 6;
-            this.txtnew1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // txtold2
-            // 
-            this.txtold2.Location = new System.Drawing.Point(115, 73);
-            this.txtold2.Name = "txtold2";
-            this.txtold2.Size = new System.Drawing.Size(126, 21);
-            this.txtold2.TabIndex = 7;
-            this.txtold2.Text = "联网更新";
-            this.txtold2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // txtnew2
-            // 
-            this.txtnew2.Location = new System.Drawing.Point(294, 74);
-            this.txtnew2.Name = "txtnew2";
-            this.txtnew2.Size = new System.Drawing.Size(139, 21);
-            this.txtnew2.TabIndex = 8;
-            this.txtnew2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txtold4.Location = new System.Drawing.Point(115, 131);
+            this.txtold4.Name = "txtold4";
+            this.txtold4.Size = new System.Drawing.Size(126, 21);
+            this.txtold4.TabIndex = 11;
+            this.txtold4.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // txtnew3
             // 
@@ -233,70 +213,213 @@
             this.txtold3.Text = "_HDA00N_";
             this.txtold3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // txtnew4
+            // txtnew2
             // 
-            this.txtnew4.Location = new System.Drawing.Point(294, 130);
-            this.txtnew4.Name = "txtnew4";
-            this.txtnew4.Size = new System.Drawing.Size(139, 21);
-            this.txtnew4.TabIndex = 12;
-            this.txtnew4.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txtnew2.Location = new System.Drawing.Point(294, 74);
+            this.txtnew2.Name = "txtnew2";
+            this.txtnew2.Size = new System.Drawing.Size(139, 21);
+            this.txtnew2.TabIndex = 8;
+            this.txtnew2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // txtold4
+            // txtold2
             // 
-            this.txtold4.Location = new System.Drawing.Point(115, 131);
-            this.txtold4.Name = "txtold4";
-            this.txtold4.Size = new System.Drawing.Size(126, 21);
-            this.txtold4.TabIndex = 11;
-            this.txtold4.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txtold2.Location = new System.Drawing.Point(115, 73);
+            this.txtold2.Name = "txtold2";
+            this.txtold2.Size = new System.Drawing.Size(126, 21);
+            this.txtold2.TabIndex = 7;
+            this.txtold2.Text = "联网更新";
+            this.txtold2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // txtnew5
+            // txtnew1
             // 
-            this.txtnew5.Location = new System.Drawing.Point(294, 160);
-            this.txtnew5.Name = "txtnew5";
-            this.txtnew5.Size = new System.Drawing.Size(139, 21);
-            this.txtnew5.TabIndex = 14;
-            this.txtnew5.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txtnew1.Location = new System.Drawing.Point(294, 47);
+            this.txtnew1.Name = "txtnew1";
+            this.txtnew1.Size = new System.Drawing.Size(139, 21);
+            this.txtnew1.TabIndex = 6;
+            this.txtnew1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // txtold5
+            // txtold1
             // 
-            this.txtold5.Location = new System.Drawing.Point(115, 160);
-            this.txtold5.Name = "txtold5";
-            this.txtold5.Size = new System.Drawing.Size(126, 21);
-            this.txtold5.TabIndex = 13;
-            this.txtold5.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txtold1.Location = new System.Drawing.Point(115, 47);
+            this.txtold1.Name = "txtold1";
+            this.txtold1.Size = new System.Drawing.Size(126, 21);
+            this.txtold1.TabIndex = 5;
+            this.txtold1.Text = "-";
+            this.txtold1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // label3
+            // chk5
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(17, 24);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(53, 12);
-            this.label3.TabIndex = 6;
-            this.label3.Text = "勾选条件";
+            this.chk5.AutoSize = true;
+            this.chk5.Location = new System.Drawing.Point(17, 163);
+            this.chk5.Name = "chk5";
+            this.chk5.Size = new System.Drawing.Size(54, 16);
+            this.chk5.TabIndex = 4;
+            this.chk5.Text = "条件5";
+            this.chk5.UseVisualStyleBackColor = true;
+            this.chk5.CheckedChanged += new System.EventHandler(this.chk5_CheckedChanged);
             // 
-            // label4
+            // chk4
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(149, 25);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(53, 12);
-            this.label4.TabIndex = 15;
-            this.label4.Text = "旧字符串";
+            this.chk4.AutoSize = true;
+            this.chk4.Location = new System.Drawing.Point(17, 131);
+            this.chk4.Name = "chk4";
+            this.chk4.Size = new System.Drawing.Size(54, 16);
+            this.chk4.TabIndex = 3;
+            this.chk4.Text = "条件4";
+            this.chk4.UseVisualStyleBackColor = true;
+            this.chk4.CheckedChanged += new System.EventHandler(this.chk4_CheckedChanged);
             // 
-            // label5
+            // chk3
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(336, 25);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(53, 12);
-            this.label5.TabIndex = 16;
-            this.label5.Text = "新字符串";
+            this.chk3.AutoSize = true;
+            this.chk3.Checked = true;
+            this.chk3.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chk3.Location = new System.Drawing.Point(17, 103);
+            this.chk3.Name = "chk3";
+            this.chk3.Size = new System.Drawing.Size(54, 16);
+            this.chk3.TabIndex = 2;
+            this.chk3.Text = "条件3";
+            this.chk3.UseVisualStyleBackColor = true;
+            this.chk3.CheckedChanged += new System.EventHandler(this.chk3_CheckedChanged);
+            // 
+            // chk2
+            // 
+            this.chk2.AutoSize = true;
+            this.chk2.Checked = true;
+            this.chk2.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chk2.Location = new System.Drawing.Point(17, 75);
+            this.chk2.Name = "chk2";
+            this.chk2.Size = new System.Drawing.Size(54, 16);
+            this.chk2.TabIndex = 1;
+            this.chk2.Text = "条件2";
+            this.chk2.UseVisualStyleBackColor = true;
+            this.chk2.CheckedChanged += new System.EventHandler(this.chk2_CheckedChanged);
+            // 
+            // chk1
+            // 
+            this.chk1.AutoSize = true;
+            this.chk1.Checked = true;
+            this.chk1.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chk1.Location = new System.Drawing.Point(17, 47);
+            this.chk1.Name = "chk1";
+            this.chk1.Size = new System.Drawing.Size(54, 16);
+            this.chk1.TabIndex = 0;
+            this.chk1.Text = "条件1";
+            this.chk1.UseVisualStyleBackColor = true;
+            this.chk1.CheckedChanged += new System.EventHandler(this.chk1_CheckedChanged);
+            // 
+            // lstFileInfoView
+            // 
+            this.lstFileInfoView.Location = new System.Drawing.Point(469, 44);
+            this.lstFileInfoView.Name = "lstFileInfoView";
+            this.lstFileInfoView.Size = new System.Drawing.Size(763, 552);
+            this.lstFileInfoView.TabIndex = 6;
+            this.lstFileInfoView.UseCompatibleStateImageBehavior = false;
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.chklstExtension);
+            this.groupBox2.Location = new System.Drawing.Point(12, 338);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(184, 258);
+            this.groupBox2.TabIndex = 7;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "预览文件类型列表";
+            // 
+            // btnPreview
+            // 
+            this.btnPreview.Location = new System.Drawing.Point(360, 51);
+            this.btnPreview.Name = "btnPreview";
+            this.btnPreview.Size = new System.Drawing.Size(76, 30);
+            this.btnPreview.TabIndex = 3;
+            this.btnPreview.Text = "预览";
+            this.btnPreview.UseVisualStyleBackColor = true;
+            this.btnPreview.Click += new System.EventHandler(this.btnPreview_Click);
+            // 
+            // chklstExtension
+            // 
+            this.chklstExtension.FormattingEnabled = true;
+            this.chklstExtension.Location = new System.Drawing.Point(19, 26);
+            this.chklstExtension.Name = "chklstExtension";
+            this.chklstExtension.Size = new System.Drawing.Size(146, 212);
+            this.chklstExtension.TabIndex = 0;
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.label2);
+            this.groupBox3.Controls.Add(this.btnDeleteExtension);
+            this.groupBox3.Controls.Add(this.btnAddExtension);
+            this.groupBox3.Controls.Add(this.txtAddExtension);
+            this.groupBox3.Controls.Add(this.lstExtension);
+            this.groupBox3.Location = new System.Drawing.Point(202, 338);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(261, 258);
+            this.groupBox3.TabIndex = 8;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "更名文件类型列表";
+            // 
+            // lstExtension
+            // 
+            this.lstExtension.FormattingEnabled = true;
+            this.lstExtension.ItemHeight = 12;
+            this.lstExtension.Location = new System.Drawing.Point(6, 26);
+            this.lstExtension.Name = "lstExtension";
+            this.lstExtension.Size = new System.Drawing.Size(120, 208);
+            this.lstExtension.TabIndex = 0;
+            // 
+            // txtAddExtension
+            // 
+            this.txtAddExtension.Location = new System.Drawing.Point(135, 47);
+            this.txtAddExtension.Name = "txtAddExtension";
+            this.txtAddExtension.Size = new System.Drawing.Size(114, 21);
+            this.txtAddExtension.TabIndex = 1;
+            // 
+            // btnAddExtension
+            // 
+            this.btnAddExtension.Location = new System.Drawing.Point(148, 83);
+            this.btnAddExtension.Name = "btnAddExtension";
+            this.btnAddExtension.Size = new System.Drawing.Size(76, 30);
+            this.btnAddExtension.TabIndex = 4;
+            this.btnAddExtension.Text = "开始";
+            this.btnAddExtension.UseVisualStyleBackColor = true;
+            // 
+            // btnDeleteExtension
+            // 
+            this.btnDeleteExtension.Location = new System.Drawing.Point(148, 119);
+            this.btnDeleteExtension.Name = "btnDeleteExtension";
+            this.btnDeleteExtension.Size = new System.Drawing.Size(76, 30);
+            this.btnDeleteExtension.TabIndex = 5;
+            this.btnDeleteExtension.Text = "开始";
+            this.btnDeleteExtension.UseVisualStyleBackColor = true;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(156, 25);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(65, 12);
+            this.label2.TabIndex = 6;
+            this.label2.Text = "输入扩展名";
+            // 
+            // chkIncludeFolders
+            // 
+            this.chkIncludeFolders.AutoSize = true;
+            this.chkIncludeFolders.Location = new System.Drawing.Point(88, 59);
+            this.chkIncludeFolders.Name = "chkIncludeFolders";
+            this.chkIncludeFolders.Size = new System.Drawing.Size(96, 16);
+            this.chkIncludeFolders.TabIndex = 4;
+            this.chkIncludeFolders.Text = "包含子文件夹";
+            this.chkIncludeFolders.UseVisualStyleBackColor = true;
             // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(484, 319);
+            this.BackColor = System.Drawing.SystemColors.Control;
+            this.ClientSize = new System.Drawing.Size(1244, 606);
+            this.Controls.Add(this.groupBox3);
+            this.Controls.Add(this.groupBox2);
+            this.Controls.Add(this.lstFileInfoView);
             this.Controls.Add(this.grbSetting);
             this.Controls.Add(this.groupBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -308,6 +431,9 @@
             this.groupBox1.PerformLayout();
             this.grbSetting.ResumeLayout(false);
             this.grbSetting.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -337,6 +463,17 @@
         private System.Windows.Forms.CheckBox chk3;
         private System.Windows.Forms.CheckBox chk2;
         private System.Windows.Forms.CheckBox chk1;
+        private System.Windows.Forms.ListView lstFileInfoView;
+        private System.Windows.Forms.Button btnPreview;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.CheckedListBox chklstExtension;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.Button btnDeleteExtension;
+        private System.Windows.Forms.Button btnAddExtension;
+        private System.Windows.Forms.TextBox txtAddExtension;
+        private System.Windows.Forms.ListBox lstExtension;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.CheckBox chkIncludeFolders;
     }
 }
 
