@@ -73,9 +73,11 @@ namespace RenameFiles
 
         private void btnGo_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(txtFolder.Text.Trim())) 
+            if (string.IsNullOrEmpty(txtFolder.Text.Trim()))
             {
-                txtFolder.Focus ();
+                MessageBox.Show("文件夹地址不能为空,请重新输入", "文件夹不存在", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                txtFolder.SelectAll();
+                txtFolder.Focus();
                 return;
             }
 
@@ -391,6 +393,8 @@ namespace RenameFiles
 
             if (string.IsNullOrEmpty(txtFolder.Text.Trim()))
             {
+                MessageBox.Show("文件夹地址不能为空,请重新输入", "文件夹不存在", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                txtFolder.SelectAll();
                 txtFolder.Focus();
                 return;
             }
@@ -642,16 +646,27 @@ namespace RenameFiles
         {
             string item = chklstExtension.GetItemText(chklstExtension.SelectedItem);
 
-            if (chklstExtension.GetItemCheckState(chklstExtension.SelectedIndex) == CheckState.Unchecked)
+            try
             {
-                if (!lstExtension.Items.Contains(item))
-                    lstExtension.Items.Add(item);
+                if (chklstExtension.GetItemCheckState(chklstExtension.SelectedIndex) == CheckState.Unchecked)
+                {
+                    if (!lstExtension.Items.Contains(item))
+                        lstExtension.Items.Add(item);
+                }
+                else if (chklstExtension.GetItemCheckState(chklstExtension.SelectedIndex) == CheckState.Checked)
+                {
+                    if (lstExtension.Items.Contains(item))
+                        lstExtension.Items.Remove(item);
+                }
             }
-            else if (chklstExtension.GetItemCheckState(chklstExtension.SelectedIndex) == CheckState.Checked)
+            catch (Exception)
             {
-                if (lstExtension.Items.Contains(item))
-                    lstExtension.Items.Remove(item);
+                
+               // throw;
             }
+
+
+
         }
 
 

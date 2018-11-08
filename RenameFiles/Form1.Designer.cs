@@ -80,13 +80,13 @@
             this.btnGo.Name = "btnGo";
             this.btnGo.Size = new System.Drawing.Size(76, 30);
             this.btnGo.TabIndex = 0;
-            this.btnGo.Text = "开始";
+            this.btnGo.Text = "开始改名";
             this.btnGo.UseVisualStyleBackColor = true;
             this.btnGo.Click += new System.EventHandler(this.btnGo_Click);
             // 
             // txtFolder
             // 
-            this.txtFolder.Location = new System.Drawing.Point(86, 24);
+            this.txtFolder.Location = new System.Drawing.Point(82, 21);
             this.txtFolder.Name = "txtFolder";
             this.txtFolder.Size = new System.Drawing.Size(265, 21);
             this.txtFolder.TabIndex = 1;
@@ -119,7 +119,9 @@
             // chkIncludeFolders
             // 
             this.chkIncludeFolders.AutoSize = true;
-            this.chkIncludeFolders.Location = new System.Drawing.Point(88, 59);
+            this.chkIncludeFolders.Checked = true;
+            this.chkIncludeFolders.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkIncludeFolders.Location = new System.Drawing.Point(17, 59);
             this.chkIncludeFolders.Name = "chkIncludeFolders";
             this.chkIncludeFolders.Size = new System.Drawing.Size(96, 16);
             this.chkIncludeFolders.TabIndex = 4;
